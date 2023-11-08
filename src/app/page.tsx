@@ -2,6 +2,8 @@ import Container from '@/components/container';
 import { IGameProps } from '@/utils/types/game';
 import Link from 'next/link';
 import Image from 'next/image';
+import { BsArrowRightSquare } from 'react-icons/bs';
+import next from 'next/types';
 
 let objectRes = {
   id: 10,
@@ -18,6 +20,7 @@ async function getDalyGame() {
   try {
     const res = await fetch(
       `${process.env.NEXT_API_URL}/next-api/?api=game_day`,
+      { next: { revalidate: 320 } },
     );
 
     return res.json();
@@ -40,14 +43,23 @@ export default async function Home() {
         </h1>
         <Link href={`/game/${dalyGame.id}`}>
           <section className="w-full bg-black rounded-lg ">
-            <Image
-              src={dalyGame.image_url}
-              alt={dalyGame.title}
-              priority
-              quality={100}
-              width={100}
-              height={100}
-            />
+            <div className="w-full max-h-96 h-96 relative rounded-lg">
+              <div className="absolute z-20 bottom-0 p-3 justify-center items-center gap-2">
+                <p className="font-bold text-xl text-white">
+                  {dalyGame.title}
+                  <BsArrowRightSquare size={24} color="#fff" />
+                </p>
+              </div>
+              <Image
+                src={dalyGame.image_url}
+                alt={dalyGame.title}
+                quality={100}
+                priority
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw"
+                className="max-h-96 object-cover rounded-lg opacity-50 hover:opacity-100 transition-all duration-300"
+              />
+            </div>
           </section>
         </Link>
       </Container>
