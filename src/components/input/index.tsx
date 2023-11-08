@@ -13,7 +13,7 @@ export default function Input() {
 
     if (input === '') return;
 
-    router.push(`game/search/${input}`);
+    router.push(`/game/search/${input}`);
   }
   return (
     <form
