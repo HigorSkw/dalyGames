@@ -1,9 +1,11 @@
-import Container from '@/components/container';
+import Container from '@/components/Container';
 import { IGameProps } from '@/utils/types/game';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BsArrowRightSquare } from 'react-icons/bs';
-import Input from '@/components/input';
+import Input from '@/components/Input';
+import { allGames } from '@/utils/database';
+import { GameCard } from '@/components/GameCard';
 
 let objectRes = {
   id: 10,
@@ -25,15 +27,25 @@ async function getDalyGame() {
 
     return res.json();
   } catch (error) {
-    console.log();
     return objectRes;
+  }
+}
+
+async function getGameData() {
+  try {
+    const res = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=games`, {
+      next: { revalidate: 320 },
+    });
+
+    return res.json();
+  } catch (error) {
+    return allGames;
   }
 }
 
 export default async function Home() {
   const dalyGame: IGameProps = await getDalyGame();
-
-  console.log(dalyGame);
+  const data: IGameProps[] = await getGameData();
 
   return (
     <main className="w-full">
@@ -64,6 +76,13 @@ export default async function Home() {
         </Link>
 
         <Input />
+
+        <h2 className="text-lg font-bold -mt-8 mb-5">Jogos para conhecer</h2>
+        <section className="grid gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {data.map((item) => (
+            <GameCard key={item.id} data={item} />
+          ))}
+        </section>
       </Container>
     </main>
   );
