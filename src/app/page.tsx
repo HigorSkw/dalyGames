@@ -3,7 +3,7 @@ import { IGameProps } from '@/utils/types/game';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BsArrowRightSquare } from 'react-icons/bs';
-import next from 'next/types';
+import Input from '@/components/input';
 
 let objectRes = {
   id: 10,
@@ -62,6 +62,8 @@ export default async function Home() {
             </div>
           </section>
         </Link>
+
+        <Input />
       </Container>
     </main>
   );
