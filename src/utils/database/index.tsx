@@ -106,3 +106,14 @@ export const allGames = [
     release: '25/07/2017',
   },
 ];
+
+export const gameSorted = {
+  id: 1,
+  title: 'The Witcher 3: Wild Hunt',
+  description:
+    'The Witcher 3: Wild Hunt é um jogo de RPG de ação ambientado em um mundo aberto impressionante, desenvolvido pela CD Projekt RED. Nele, você assume o papel de Geralt de Rivia, um caçador de monstros lendário, e embarca em uma jornada épica para encontrar sua filha adotiva, Ciri, enquanto enfrenta criaturas terríveis e toma decisões morais impactantes. Com uma narrativa envolvente, combates desafiadores e um vasto mundo para explorar, The Witcher 3 é considerado um dos melhores jogos de todos os tempos.',
+  image_url: 'https://sujeitoprogramador.com/next-api/foto1.png',
+  platforms: ['PC', 'PlayStation 4', 'Xbox One'],
+  categories: ['RPG', 'Ação', 'Mundo Aberto'],
+  release: '19/05/2015',
+};
