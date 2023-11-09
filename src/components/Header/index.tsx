@@ -19,7 +19,7 @@ export default function Header() {
           </Link>
 
           <Link href={'/games'}>Games</Link>
-          <Link href={'/perfil'}>Perfil</Link>
+          <Link href={'/profile'}>Perfil</Link>
         </nav>
 
         <div className="hidden sm:flex">
