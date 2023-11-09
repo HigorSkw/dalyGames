@@ -2,6 +2,7 @@ import Container from '@/components/Container';
 import { GameCard } from '@/components/GameCard';
 import Input from '@/components/Input';
 import { IGameProps } from '@/utils/types/game';
+import { Metadata } from 'next';
 
 async function getData(title: string) {
   try {
