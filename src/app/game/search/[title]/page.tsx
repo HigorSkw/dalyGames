@@ -9,6 +9,7 @@ async function getData(title: string) {
     const decodeTitle = decodeURI(title);
     const res = await fetch(
       `${process.env.NEXT_API_URL}/next-api/?api=game&title=${decodeTitle}`,
+      { cache: 'no-cache' },
     );
 
     return res.json();
@@ -33,7 +34,9 @@ export default async function Search({
           Veja o que encontramos na nossa base
         </h1>
 
-        {!games && <p>Esse jogo não foi</p>}
+        {!games && (
+          <p>Esse jogo não foi encontrado em nossa base de dados...</p>
+        )}
 
         <section className="grid gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {games && games.map((item) => <GameCard key={item.id} data={item} />)}
