@@ -5,6 +5,49 @@ import { redirect } from 'next/navigation';
 import Container from '@/components/Container';
 import { Label } from './components/label';
 import { GameCard } from '@/components/GameCard';
+import { Metadata } from 'next';
+
+export async function generateMetaData({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  try {
+    const response: IGameProps = await fetch(
+      `${process.env.NEXT_API_URL}/next-api/?api=game&=${params.id}`,
+      { cache: 'no-store' },
+    )
+      .then((res) => res.json())
+      .catch(() => {
+        return {
+          title: 'DalyGames - Descubra jogos incríves para se divertir',
+        };
+      });
+
+    return {
+      title: response.title,
+      description: `${response.description.slice(0, 100)}...`,
+      openGraph: {
+        title: response.title,
+        images: [response.image_url],
+      },
+      robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          noimageindex: true,
+        },
+      },
+    };
+  } catch (error) {
+    return {
+      title: 'DalyGames - Descubra jogos incríves para se divertir',
+    };
+  }
+}
 
 async function getData(id: string) {
   try {
